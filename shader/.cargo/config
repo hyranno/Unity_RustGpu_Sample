@@ -1,0 +1,13 @@
+[build]
+target = "spirv-unknown-spv1.5"
+rustflags = [
+    "-Zcodegen-backend=rustc_codegen_spirv.dll",
+    "-Zbinary-dep-depinfo",
+    "-Csymbol-mangling-version=v0",
+    "-Zcrate-attr=feature(register_tool)",
+    "-Zcrate-attr=register_tool(rust_gpu)"
+]
+
+[unstable]
+build-std=["core"]
+build-std-features=["compiler-builtins-mem"]
