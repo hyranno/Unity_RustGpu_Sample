@@ -1,15 +1,15 @@
 [package]
-name = "shader"
+name = "shader_src"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[dependencies]
-spirv_cross = {version = "0.23", features = ["hlsl"]}
+[lib]
+crate-type = ["dylib"]
 
-[build-dependencies]
-spirv-builder = "0.8"
+[dependencies]
+spirv-std = { version = "0.8" }
 
 # Compile build-dependencies in release mode with
 # the same settings as regular dependencies.
