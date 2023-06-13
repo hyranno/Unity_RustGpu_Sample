@@ -18,17 +18,13 @@ fn main(){
     options.force_storage_buffer_as_uav = false;
     options.nonwritable_uav_texture_as_srv = false;
     options.force_zero_initialized_variables = true;
-    options.entry_point = None;
-    ast.set_compiler_options(&options).expect("Failed to set the hlsl compile options!");
 
-
-    // TODO: output each entry point to hlsl
     for entry_point in &ast.get_entry_points().unwrap() {
-        println!("{:?}", entry_point);
+        options.entry_point = Some((entry_point.name.clone(), entry_point.execution_model));
+        ast.set_compiler_options(&options).expect("Failed to set the hlsl compile options!");
+        let filepath = format!("target/shader.{}.hlsl", entry_point.name);
+        let mut file = File::create(filepath).expect("Failed to open the hlsl output file!");
+        write!(file, "{}", ast.compile().expect("Failed to compile to hlsl!")).expect("Failed to write hlsl to the file!");
     }
-
-    let filepath = "target/shader.hlsl";
-    let mut file = File::create(filepath).expect("Failed to open the hlsl output file!");
-    write!(file, "{}", ast.compile().expect("Failed to compile to hlsl!")).expect("Failed to write hlsl to the file!");
 
 }
