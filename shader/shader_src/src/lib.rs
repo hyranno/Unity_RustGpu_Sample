@@ -15,13 +15,8 @@ pub fn main_fs(
 
 #[spirv(vertex)]
 pub fn main_vs(
-    #[spirv(vertex_index)] vertex_id: i32,
+    in_position: Vec4,
     #[spirv(position)] out_position: &mut Vec4,
 ) {
-    *out_position = vec4(
-        vertex_id as f32 - 1.0,
-        (vertex_id & 1) as f32 * 2.0 - 1.0,
-        0.0,
-        1.0,
-    );
+    *out_position = in_position;
 }

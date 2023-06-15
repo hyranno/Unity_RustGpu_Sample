@@ -6,7 +6,9 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-spirv_cross = {version = "0.23", features = ["hlsl"]}
+spirv_cross = { git = "https://github.com/aclysma/spirv_cross.git", branch="add-vertex-attribute-remap", features = ["hlsl"] }
+# not merged yet https://github.com/grovesNL/spirv_cross/pull/181
+# spirv_cross = {version = "0.23", features = ["hlsl"]}
 
 [build-dependencies]
 spirv-builder = "0.8"

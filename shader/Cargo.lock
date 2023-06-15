@@ -462,8 +462,7 @@ dependencies = [
 [[package]]
 name = "spirv_cross"
 version = "0.23.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "60647fadbf83c4a72f0d7ea67a7ca3a81835cf442b8deae5c134c3e0055b2e14"
+source = "git+https://github.com/aclysma/spirv_cross.git?branch=add-vertex-attribute-remap#4e844cae918e3976d2eda2ae253d2609dbfcb22f"
 dependencies = [
  "cc",
  "js-sys",
