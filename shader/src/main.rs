@@ -1,3 +1,4 @@
+#![feature(fs_try_exists)]
 use spirv_cross::{spirv, hlsl};
 use spirv_cross::hlsl::HlslVertexAttributeRemap;
 use std::fs::File;
@@ -30,6 +31,11 @@ fn main(){
         ]
     );
 
+    let hlsl_target_dir = "target/hlsl";
+    if !std::fs::try_exists(hlsl_target_dir).expect("Failed to check exists of target hlsl dir!") {
+        std::fs::create_dir(hlsl_target_dir).expect("Failed to create target hlsl dir!");
+    }
+
     for entry_point in &ast.get_entry_points().unwrap() {
         options.entry_point = Some((entry_point.name.clone(), entry_point.execution_model));
         ast.set_compiler_options(&options).expect("Failed to set the hlsl compile options!");
@@ -38,7 +44,7 @@ fn main(){
                 ast.add_vertex_attribute_remap(&remap).expect("Failed to add vertex attribute remap!");
             }
         }
-        let filepath = format!("target/shader.{}.hlsl", entry_point.name);
+        let filepath = format!("{}/shader.{}.hlsl", hlsl_target_dir, entry_point.name);
         let mut file = File::create(filepath).expect("Failed to open the hlsl output file!");
         write!(file, "{}", ast.compile().expect("Failed to compile to hlsl!")).expect("Failed to write hlsl to the file!");
     }
