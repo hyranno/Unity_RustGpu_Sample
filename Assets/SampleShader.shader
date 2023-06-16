@@ -7,11 +7,15 @@ Shader "Unlit/SampleShader"
         Pass
         {
             HLSLPROGRAM
-            #pragma vertex main_vs
-            #pragma fragment main_fs
+            #pragma vertex main
+            #pragma fragment main
 
-            #include "/Assets/HLSL.symlink/shader.main_vs.hlsl"
-            #include "/Assets/HLSL.symlink/shader.main_fs.hlsl"
+            #ifdef SHADER_STAGE_VERTEX
+                #include "/Assets/HLSL.symlink/shader.main_vs.hlsl"
+            #endif
+            #ifdef SHADER_STAGE_FRAGMENT
+                #include "/Assets/HLSL.symlink/shader.main_fs.hlsl"
+            #endif
 
             ENDHLSL
         }
