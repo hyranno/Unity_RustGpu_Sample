@@ -20,3 +20,7 @@ Unityプロジェクト内にshaderクレートを置き、その下にshader_sr
 * RustのSPIRV-CrossラッパーはSPIRV-Crossのフル機能をカバーしているわけではないので、適宜機能を追加する必要がある。今回はvertex_attribute_remapがそれで、[pull request](https://github.com/grovesNL/spirv_cross/pull/181)を出してる人が居たのでそちらを使わせてもらっている。
 * SPIR-VやHLSLは1つのファイルでエントリポイントを複数含むことができるが、SPIRV-Crossは[対応していない](https://github.com/KhronosGroup/SPIRV-Cross/issues/317)。今回はUnity側のプリプロセッサでステージごとに読むファイルを切り替えて対応。
 
+## 他のゲームエンジンについて
+* UnrealEngineはHLSLなので同様のつらみが予想される。
+* Rust製のゲームエンジンでは[Fyrox](https://fyrox.rs/)がGLSL、[Bevy](https://bevyengine.org/)がWGSLとGLSLに対応している様子。WGSLへの変換は[Tint](https://dawn.googlesource.com/tint)を使う事になりそう。
+
